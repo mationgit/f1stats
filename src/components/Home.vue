@@ -3,20 +3,16 @@
 
   <section>
     <div>
-      <label>Choose a car:</label>
+      <label>Choose a year:</label>
 
-      <select name="cars" id="cars">
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
-        <option value="Mattias">Mati stinkt</option>
+      <select name="cars" id="cars" @change="onChange()">
+        <option v-for="i in 50" :key="i">{{ i }}</option>
       </select>
     </div>
 
     <div v-for="item in list" :key="item.driverId">
-      {{ item.driverId }}
-      <!--<Adapter item="{{item}}"/>-->
+      
+      <Adapter :item="item" />
     </div>
 
   </section>
@@ -24,18 +20,25 @@
 </template>
 
 <script>
+import Adapter from './Adapter.vue'
 export default {
-  //components: { Adapter },
+  components: { Adapter },
   data() {
     return {
-      list: []
+      list: [],
+      year: 2021
     }
   },
-  mounted() {
-    fetch('http://ergast.com/api/f1/2021/drivers.json')
+  methods: {
+    onChange: function() {
+      fetch('http://ergast.com/api/f1/' + this.year + '/drivers.json')
       .then(res => res.json())
       .then(data => this.list = data.MRData.DriverTable.Drivers)
       .catch(err => console.log(err.message))
+    }
+  },
+  mounted() {
+    this.onChange()
   }
 }
 </script>
