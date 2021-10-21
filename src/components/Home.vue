@@ -6,12 +6,15 @@
       <label>Choose a year:</label>
 
       <select name="cars" id="cars" @change="onChange()">
-        <option v-for="i in 50" :key="i">{{ i }}</option>
+        <!--<option v-for="i in 50" :key="i">{{ i }}</option>-->
+        <option>2021</option>
+        <option>2020</option>
+        <option>2019</option>
+        <option>2018</option>
       </select>
-    </div>
+    </div><br><br>
 
-    <div v-for="item in list" :key="item.driverId">
-      
+    <div v-for="item in list" :key="item.driverId" class="content">
       <Adapter :item="item" />
     </div>
 
@@ -31,7 +34,8 @@ export default {
   },
   methods: {
     onChange: function() {
-      fetch('http://ergast.com/api/f1/' + this.year + '/drivers.json')
+      
+      fetch('https://ergast.com/api/f1/' + document.getElementById('cars').value + '/drivers.json')
       .then(res => res.json())
       .then(data => this.list = data.MRData.DriverTable.Drivers)
       .catch(err => console.log(err.message))
@@ -45,4 +49,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .content {
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>
