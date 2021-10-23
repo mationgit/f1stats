@@ -1,10 +1,8 @@
 # API
 https://documenter.getpostman.com/view/11586746/SztEa7bL
-https://www.c-sharpcorner.com/article/how-to-fetch-data-from-web-api-in-vue-js-application/
 
 
-
-
+https://api-sports.io/documentation/formula-1/v1
 
 
 # project

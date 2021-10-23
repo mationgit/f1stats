@@ -3,7 +3,7 @@
 
   <section>
     <div>
-      <label>Choose a year:</label>
+      <label>Year: </label>
 
       <select name="cars" id="cars" @change="onChange()">
         <!--<option v-for="i in 50" :key="i">{{ i }}</option>-->
@@ -11,10 +11,12 @@
         <option>2020</option>
         <option>2019</option>
         <option>2018</option>
-      </select>
+      </select><br><br>
+      <label>Search: </label>
+      <input v-model="searchTerm" type="text">
     </div><br><br>
 
-    <div v-for="item in list" :key="item.driverId" class="content">
+    <div v-for="item in filterByTerm" :key="item.driverId" class="content">
       <Adapter :item="item" />
     </div>
 
@@ -29,7 +31,15 @@ export default {
   data() {
     return {
       list: [],
-      year: 2021
+      year: 2021,
+      searchTerm: ""
+    }
+  },
+  computed: {
+    filterByTerm() {
+      return this.list.filter(item => {
+        return item.familyName.toLowerCase().includes(this.searchTerm.toLowerCase());
+      });
     }
   },
   methods: {
