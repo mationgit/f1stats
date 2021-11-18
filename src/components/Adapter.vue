@@ -1,6 +1,6 @@
 <template>
   <div class="adapter">
-    <table width="100%">
+    <table>
       <tr>
         <td rowspan="2">
           {{item.position}}
