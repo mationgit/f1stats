@@ -10,7 +10,7 @@
         <label>Year: </label>
       <div class="w3-row"></div>
         <div class="w3-col w3-container" style="width:40%"> </div>
-        <select class="w3-select w3-col" name="cars" style="width:20%" id="cars" @change="onChange()">
+        <select class="w3-select w3-col" name="year" style="width:20%" id="year" @change="onChange()">
           <!--<option v-for="i in 50" :key="i">{{ i }}</option>-->
           <option>2021</option>
           <option>2020</option>
@@ -20,15 +20,13 @@
       </div>
       <label>Search: </label>
       <div class="w3-row">
-        <div class="w3-col w3-container" style="width:20%"> </div>
-        <input class="w3-input w3-border w3-round w3-col" style="width:60%" v-model="searchTerm" type="text">
+        <div class="w3-col w3-container" style="width:40%"> </div>
+        <input class="w3-input w3-border w3-round w3-col" style="width:20%" v-model="searchTerm" type="text">
       </div>
       <br><br>
-    <div v-for="item in filterByTerm" :key="item.Driver.driverId" class="content">
-      <div class="w3-row">
-        <div class="w3-container w3-col" style="width:10%"></div>
+    <div v-for="item in filterByTerm" :key="item.Driver.driverId" class="content w3-row">
+        <div class="w3-col w3-container" style="width:10%"></div>
         <Adapter class="w3-col" style="width:80%" :item="item" />
-      </div>
     </div>
     
 
@@ -57,11 +55,14 @@ export default {
       });
     }
   },
+  mounted(){
+    this.onChange()
+  },
   methods: 
       {
         onChange: function() {
           console.log("test")
-          fetch('https://ergast.com/api/f1/' + document.getElementById('cars').value + '/driverStandings.json')
+          fetch('https://ergast.com/api/f1/' + document.getElementById('year').value + '/driverStandings.json')
           .then(res => res.json())
           .then(data => {
             this.list = data.MRData.StandingsTable.StandingsLists[0].DriverStandings
@@ -73,8 +74,19 @@ export default {
             
           })
         },
-        mounted() {
-          this.onChange()
+        onload: function() {
+          console.log("loading")
+          fetch('https://ergast.com/api/f1/2021/driverStandings.json')
+          .then(res => res.json())
+          .then(data => {
+            this.list = data.MRData.StandingsTable.StandingsLists[0].DriverStandings
+            console.log(this.list)
+            
+            this.list.forEach(element => {
+              element.Driver.nationality = this.getCountryCode(element.Driver.nationality)
+            })
+            
+          })
         },
         getCountryCode: function(nationality) {
           let cc = ''
@@ -83,7 +95,6 @@ export default {
               cc = country.alpha_2_code.toLowerCase()
             }
           })
-          console.log(cc)
           return 'https://flagpedia.net/data/flags/normal/' + cc + '.png'
         }
       }

@@ -1,14 +1,28 @@
 <template>
   <div class="adapter">
-    <img src={{item.Driver.nationality}} alt="flag" width="20" height="20">
-    {{item.Driver.permanentNumber}}
-    {{item.Driver.givenName}}
-    {{item.Driver.familyName}}
-    <br>
-    {{item.Driver.dateOfBirth}}
-    {{item.Constructors[0].name}}
-    {{item.Driver.nationality}}
-    
+    <table width="100%">
+      <tr>
+        <td rowspan="2">
+          {{item.position}}
+        </td>
+        <td rowspan="2">
+          <img :src=item.Driver.nationality alt="flag" width="25" height="20">
+        </td>
+        <td>
+          {{item.Driver.givenName}}
+          {{item.Driver.familyName}}
+        </td>
+        <td rowspan="2">
+          {{item.points}}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          {{item.Constructors[0].name}}
+          #{{item.Driver.permanentNumber}}
+        </td>
+      </tr>
+    </table>
   </div>
   <hr>
 </template>
