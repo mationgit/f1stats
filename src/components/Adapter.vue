@@ -2,22 +2,22 @@
   <div class="adapter">
     <table>
       <tr>
-        <td rowspan="2">
+        <td rowspan="2" class="position">
           {{item.position}}
         </td>
-        <td rowspan="2">
-          <img :src=item.Driver.nationality alt="flag" width="25" height="20">
+        <td rowspan="2" class="nationality">
+          <img :src=item.Driver.nationality class="flag" alt="flag" width="25" height="25">
         </td>
-        <td>
-          {{item.Driver.givenName}}
+        <td class="driver">
+          {{item.Driver.givenName.charAt(0)}}.
           {{item.Driver.familyName}}
         </td>
-        <td rowspan="2">
-          {{item.points}}
+        <td rowspan="2" calss="points">
+          {{item.points}}pt
         </td>
       </tr>
       <tr>
-        <td>
+        <td class="driver">
           {{item.Constructors[0].name}}
           #{{item.Driver.permanentNumber}}
         </td>
@@ -31,9 +31,6 @@
 export default {
   props: {
     item: {}
-  },
-  data () {
-    
   },
   methods: {
     fetchCountryFlag: function() {
@@ -58,5 +55,28 @@ export default {
 
   hr {
     border-top: 1px solid darkgray;
+  }
+
+  .flag {
+    border-radius: 5px;
+    border: 1px solid grey !important;
+  }
+
+  .position {
+    padding: 10px;
+    width: 45px;
+  }
+
+  .nationality {
+    padding-right: 15px;
+  }
+
+  .driver {
+    width: 140px;
+    text-align: left;
+  }
+
+  .points {
+    width: 70px;
   }
 </style>

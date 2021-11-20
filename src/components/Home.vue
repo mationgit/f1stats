@@ -12,10 +12,7 @@
         <div class="w3-col w3-container" style="width:40%"> </div>
         <select class="w3-select w3-col" name="year" style="width:20%" id="year" @change="onChange()">
           <!--<option v-for="i in 50" :key="i">{{ i }}</option>-->
-          <option>2021</option>
-          <option>2020</option>
-          <option>2019</option>
-          <option>2018</option>
+          <option v-for="year in years" :key="year">{{year}}</option>
         </select><br><br>
       </div>
       <label>Search: </label>
@@ -24,14 +21,9 @@
         <input class="w3-input w3-border w3-round w3-col" style="width:20%" v-model="searchTerm" type="text">
       </div>
       <br><br>
-    <div v-for="item in filterByTerm" :key="item.Driver.driverId" class="content w3-row">
-        <div class="w3-col w3-container" style="width:10%"></div>
-        <Adapter class="w3-col" style="width:80%" :item="item" />
+    <div v-for="item in filterByTerm" :key="item.Driver.driverId" class="content">
+        <Adapter :item="item" />
     </div>
-    
-
-
-
   </section>
 
 </template>
@@ -44,6 +36,7 @@ export default {
     return {
       countryCodes: require('../assets/countries.json'),
       list: [],
+      years: this.fillYears(),
       year: 2021,
       searchTerm: ""
     }
@@ -51,37 +44,20 @@ export default {
   computed: {
     filterByTerm() {
       return this.list.filter(item => {
-        return item.Driver.familyName.toLowerCase().includes(this.searchTerm.toLowerCase());
+        return (item.Driver.familyName + item.Driver.givenName + item.Constructors[0].name).toLowerCase().includes(this.searchTerm.toLowerCase());
       });
     }
   },
-  mounted(){
+  mounted() {
     this.onChange()
   },
   methods: 
       {
         onChange: function() {
-          console.log("test")
           fetch('https://ergast.com/api/f1/' + document.getElementById('year').value + '/driverStandings.json')
           .then(res => res.json())
           .then(data => {
             this.list = data.MRData.StandingsTable.StandingsLists[0].DriverStandings
-            console.log(this.list)
-            
-            this.list.forEach(element => {
-              element.Driver.nationality = this.getCountryCode(element.Driver.nationality)
-            })
-            
-          })
-        },
-        onload: function() {
-          console.log("loading")
-          fetch('https://ergast.com/api/f1/2021/driverStandings.json')
-          .then(res => res.json())
-          .then(data => {
-            this.list = data.MRData.StandingsTable.StandingsLists[0].DriverStandings
-            console.log(this.list)
-            
             this.list.forEach(element => {
               element.Driver.nationality = this.getCountryCode(element.Driver.nationality)
             })
@@ -91,11 +67,18 @@ export default {
         getCountryCode: function(nationality) {
           let cc = ''
           this.countryCodes.forEach(country => {
-            if (country.nationality.includes(nationality)) {
+            if (country.nationality.split(', ').includes(nationality)) {
               cc = country.alpha_2_code.toLowerCase()
+              return
             }
           })
           return 'https://flagpedia.net/data/flags/normal/' + cc + '.png'
+        },
+        fillYears: function() {
+          var years = []
+          for (var i = new Date().getFullYear(); i >= 1950; i--)
+            years.push(i)
+          return years
         }
       }
 }
@@ -106,7 +89,7 @@ export default {
   @import "https://cdnjs.cloudflare.com/ajax/libs/w3-css/4.1.0/w3.css";
 
   .content {
-    width: 40%;
+    width: 25%;
     margin-left: auto;
     margin-right: auto;
   }
@@ -120,5 +103,47 @@ export default {
     font-size: 200%;
     color: red;
     font-weight: bold;
+  }
+
+  @media only screen and (max-width: 1350px) {
+    .content {
+      width: 30%;
+    }
+  }
+
+  @media only screen and (max-width: 1100px) {
+    .content {
+      width: 35%;
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    .content {
+      width: 45%;
+    }
+  }
+
+  @media only screen and (max-width: 700px) {
+    .content {
+      width: 55%;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .content {
+      width: 65%;
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    .content {
+      width: 75%;
+    }
+  }
+
+  @media only screen and (max-width: 450px) {
+    .content {
+      width: 95%;
+    }
   }
 </style>

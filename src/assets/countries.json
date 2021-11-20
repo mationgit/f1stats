@@ -7,13 +7,6 @@
         "nationality": "Afghan"
     },
     {
-        "num_code": "248",
-        "alpha_2_code": "AX",
-        "alpha_3_code": "ALA",
-        "en_short_name": "\u00c5land Islands",
-        "nationality": "\u00c5land Island"
-    },
-    {
         "num_code": "8",
         "alpha_2_code": "AL",
         "alpha_3_code": "ALB",
@@ -245,13 +238,6 @@
         "nationality": "Bulgarian"
     },
     {
-        "num_code": "854",
-        "alpha_2_code": "BF",
-        "alpha_3_code": "BFA",
-        "en_short_name": "Burkina Faso",
-        "nationality": "Burkinab\u00e9"
-    },
-    {
         "num_code": "108",
         "alpha_2_code": "BI",
         "alpha_3_code": "BDI",
@@ -397,13 +383,6 @@
         "alpha_3_code": "CUB",
         "en_short_name": "Cuba",
         "nationality": "Cuban"
-    },
-    {
-        "num_code": "531",
-        "alpha_2_code": "CW",
-        "alpha_3_code": "CUW",
-        "en_short_name": "Cura\u00e7ao",
-        "nationality": "Cura\u00e7aoan"
     },
     {
         "num_code": "196",
@@ -1110,7 +1089,7 @@
         "alpha_2_code": "NZ",
         "alpha_3_code": "NZL",
         "en_short_name": "New Zealand",
-        "nationality": "New Zealand, NZ"
+        "nationality": "New Zealand, NZ, New Zealander"
     },
     {
         "num_code": "558",
@@ -1260,13 +1239,6 @@
         "nationality": "Qatari"
     },
     {
-        "num_code": "638",
-        "alpha_2_code": "RE",
-        "alpha_3_code": "REU",
-        "en_short_name": "R\u00e9union",
-        "nationality": "R\u00e9unionese, R\u00e9unionnais"
-    },
-    {
         "num_code": "642",
         "alpha_2_code": "RO",
         "alpha_3_code": "ROU",
@@ -1286,13 +1258,6 @@
         "alpha_3_code": "RWA",
         "en_short_name": "Rwanda",
         "nationality": "Rwandan"
-    },
-    {
-        "num_code": "652",
-        "alpha_2_code": "BL",
-        "alpha_3_code": "BLM",
-        "en_short_name": "Saint Barth\u00e9lemy",
-        "nationality": "Barth\u00e9lemois"
     },
     {
         "num_code": "654",
