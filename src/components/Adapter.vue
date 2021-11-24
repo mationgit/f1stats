@@ -60,6 +60,7 @@ export default {
   .flag {
     border-radius: 5px;
     border: 1px solid grey !important;
+    object-fit: cover;
   }
 
   .position {
