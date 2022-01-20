@@ -12,7 +12,7 @@
           {{item.Driver.givenName.charAt(0)}}.
           {{item.Driver.familyName}}
         </td>
-        <td rowspan="2" calss="points">
+        <td rowspan="2" class="points">
           {{item.points}}pt
         </td>
       </tr>
